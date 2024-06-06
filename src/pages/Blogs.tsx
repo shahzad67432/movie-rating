@@ -15,7 +15,6 @@ const Blogs: React.FC = () => {
     queryKey: ['movies', page],
     queryFn: () => fetchBlogsData(page * limit, limit),
     staleTime: 1000 * 60 * 10,
-    placeholderData: true,
   });
 
   console.log(data);
@@ -45,6 +44,7 @@ const Blogs: React.FC = () => {
       {Array.isArray(data) && data.length > 0 ? (
         data.map(season => (
           <div key={season.seasonId} className="flex flex-wrap justify-center">
+            {/* @ts-ignore */}
             {season.episodes.map(episode => (
               <EpisodeCard key={episode.episodeId} episode={episode} onClick={() => handleEpisodeClick(episode)} />
             ))}
@@ -64,6 +64,7 @@ const Blogs: React.FC = () => {
         <span className="text-white py-2 px-4">{page}</span>
         <button
           onClick={handleNextPage}
+          //@ts-ignore
           disabled={data && data.length < limit}
           className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-2"
         >
